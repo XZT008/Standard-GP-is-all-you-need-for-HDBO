@@ -31,7 +31,7 @@ to `numpy==1.22.0` and change `grakel==0.1.8` to `grakel==0.1.10`.
 
 ### Download executables
 1. For mopta, download from [Here](https://leonard.papenmeier.io/2023/02/09/mopta08-executables.html). If your machine is amd64, use this [link](https://mopta.papenmeier.io/mopta08_amd64.exe). And put it under `Standard-BO/benchmark/data`.
-2. For SVM, download from [Here](http://mopta-executables.s3-website.eu-north-1.amazonaws.com/slice_localization_data.csv.xz). And put it under `Standard-BO/benchmark/data`.
+2. For SVM, download from [Here](https://archive.ics.uci.edu/dataset/206/relative+location+of+ct+slices+on+axial+axis). And put the .csv file under `Standard-BO/benchmark/data`.
 
 ## Running experiments
 We wrote our run script `Standard-BO/baselines/run_script.py` in a way that could be efficiently run on HPC with Slurm.
