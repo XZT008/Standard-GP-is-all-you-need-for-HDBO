@@ -4,7 +4,32 @@ This repository provides code for our paper: [Standard Gaussian Process is All Y
 In our paper, we argued that Standard GP is by far the most robust surrogate model for HDBO.
 
 ## Installation
+### Setting environment
+NOTE: This code need several repositories for realworld benchmarks, and there will be some dependency conflicts. Please just ignore them.
 
+First, create a conda env and install [LassoBench](https://github.com/ksehic/LassoBench) and [NASLib](https://github.com/automl/NASLib).
+```angular2html
+conda create -n gp_env python=3.8
+
+# activate gp_env and cd TO THIS REPO
+git clone https://github.com/ksehic/LassoBench.git
+git clone https://github.com/automl/NASLib.git
+
+# First install LassoBench, then NASLib
+cd LassoBench
+pip install -e .
+cd ..
+cd NASLib 
+pip install -e .
+cd ..
+
+# Finally, install this repo
+pip install -e .
+```
+If you have trouble installing NASLib, then modify their requirements.txt. Change `numpy>=1.22.0`
+to `numpy==1.22.0` and change `grakel==0.1.8` to `grakel==0.1.10`.
+
+### 
 ## Running experiments
 We wrote our run script `Standard-BO/baselines/run_script.py` in a way that could be efficiently run on HPC with Slurm.
 ```angular2html
