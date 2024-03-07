@@ -27,7 +27,8 @@ def load_model(model_name: str):
 
 
 def load_model_from_checkpoint(model_name: str):
-    base_dir = r"C:\Users\xzt\Desktop\kspace_classifier_policy\TT-HDBO\benchmark\saved_models\\"
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    base_dir = os.path.join(dir_path, "saved_models")
     if model_name == "resnet152":
         model = torchvision.models.resnet152(weights='DEFAULT')
         in_channels = model.fc.in_features
@@ -39,7 +40,7 @@ def load_model_from_checkpoint(model_name: str):
     else:
         raise NotImplementedError
 
-    model.load_state_dict(torch.load(base_dir+model_name+".pt"))
+    model.load_state_dict(torch.load(os.path.join(base_dir, f"{model_name}.pt")))
     return model
 
 
@@ -47,7 +48,9 @@ def create_val_img_folder():
     '''
     This method is responsible for separating validation images into separate sub folders
     '''
-    dataset_dir = r"C:\Users\xzt\Desktop\kspace_classifier_policy\TT-HDBO\benchmark\tiny-imagenet-200"
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    dataset_dir = os.path.join(dir_path, "tiny-imagenet-200")
+    # dataset_dir = r"C:\Users\xzt\Desktop\kspace_classifier_policy\TT-HDBO\benchmark\tiny-imagenet-200"
     val_dir = os.path.join(dataset_dir, 'val')
     img_dir = os.path.join(val_dir, 'images')
 
@@ -72,14 +75,15 @@ def create_val_img_folder():
 def create_dataloaders(train_bs, test_bs):
     create_val_img_folder()
     norm = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-    root_dir = r"C:\Users\xzt\Desktop\kspace_classifier_policy\TT-HDBO\benchmark\tiny-imagenet-200\\"
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    root_dir = os.path.join(dir_path, "tiny-imagenet-200")
     # train_trans = [transforms.RandomHorizontalFlip(), transforms.RandomResizedCrop(224), transforms.ToTensor(), norm]
     # val_trans = [transforms.Resize(256), transforms.CenterCrop(224), transforms.ToTensor(), norm]
     train_trans = [transforms.Resize(224), transforms.ToTensor(), norm]
     val_trans = [transforms.Resize(224), transforms.ToTensor(), norm]
     all_datasets = {
-        "train": datasets.ImageFolder(root_dir+"train", transform=transforms.Compose(train_trans)),
-        "val": datasets.ImageFolder(root_dir + "val/images", transform=transforms.Compose(val_trans)),
+        "train": datasets.ImageFolder(os.path.join(root_dir, "train"), transform=transforms.Compose(train_trans)),
+        "val": datasets.ImageFolder(os.path.join(root_dir, "val", "images"), transform=transforms.Compose(val_trans)),
     }
 
     all_dataloaders = {
