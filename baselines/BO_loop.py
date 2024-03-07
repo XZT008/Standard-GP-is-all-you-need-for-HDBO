@@ -28,7 +28,7 @@ import time
 from infras.randutils import *
 
 
-def BO_loop_GP(dataset, seed, num_step=200, beta=1.5, if_ard=False, if_softplus=True):
+def BO_loop_GP(dataset, seed, num_step=200, beta=1.5, if_ard=False, if_softplus=True, acqf_type="UCB"):
     best_y = []
     time_list = []
     dim = dataset.func.dims
@@ -40,7 +40,13 @@ def BO_loop_GP(dataset, seed, num_step=200, beta=1.5, if_ard=False, if_softplus=
         model = GP_Wrapper(X, Y, if_ard, if_softplus)
         model.train_model(500, 0.1)
 
-        acqf = UpperConfidenceBound(model=model.gp_model, beta=beta, maximize=True)
+        if acqf_type == "UCB":
+            acqf = UpperConfidenceBound(model=model.gp_model, beta=beta, maximize=True)
+        elif acqf_type == "EI":
+            acqf = ExpectedImprovement(model=model.gp_model, best_f=Y.max())
+        else:
+            raise NotImplementedError
+
         new_x, _ = optimize_acqf(
             acq_function=acqf,
             bounds=torch.tensor([[0.0] * dim, [1.0] * dim]),
@@ -57,35 +63,6 @@ def BO_loop_GP(dataset, seed, num_step=200, beta=1.5, if_ard=False, if_softplus=
         best_y_after = dataset.get_curr_max_unnormed()
         
         print(f"Seed: {seed} --- At itr: {i}: best value before={best_y_before}, best value after={best_y_after}, current query: {dataset.y[-1]}", flush=True)
-        best_y.append(best_y_before)
-    return best_y, time_list
-
-    
-def BO_loop_GP_EI(dataset, num_step=200, if_ard=False, if_softplus=True):
-    best_y = []
-    time_list = []
-    dim = dataset.func.dims
-    for i in range(1, num_step+1):
-        start_time = time.time()
-        X, Y = dataset.get_data(normalize=True)
-        best_y_before = dataset.get_curr_max_unnormed()
-        model = GP_Wrapper(X, Y, if_ard, if_softplus)
-        model.train_model(500, 0.1)
-        acqf = ExpectedImprovement(model=model.gp_model, best_f=Y.max())
-        new_x, _ = optimize_acqf(
-            acq_function=acqf,
-            bounds=torch.tensor([[0.0] * dim, [1.0] * dim]),
-            q=1,
-            num_restarts=20,
-            raw_samples=1000,
-            options={},
-        )
-        end_time = time.time()
-        time_used = end_time - start_time
-        time_list.append(time_used)
-        dataset.add(new_x)
-        best_y_after = dataset.get_curr_max_unnormed()
-        print(f"At itr: {i}: best value before={best_y_before}, best value after={best_y_after}", flush=True)
         best_y.append(best_y_before)
     return best_y, time_list
     

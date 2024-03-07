@@ -22,7 +22,7 @@ class Config:
 
 def all_configs():
     config_list = []
-    for seed in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]:
+    for seed in range(10):
         for model_name in ['GP_ARD', 'GP', 'GP_ARD_PYRO', 'GP_PYRO', 'SaasBO_MAP']:
             for func_name in ['mopta08', 'rover', 'nas201', 'dna', 'SVM', 'Ackley', 'Ackley150', 'StybTang_V1',
                               'Rosenbrock_V1', 'Rosenbrock100_V1', 'Hartmann6']:
