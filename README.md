@@ -30,7 +30,7 @@ If you have trouble installing NASLib, then modify their requirements.txt. Chang
 to `numpy==1.22.0` and change `grakel==0.1.8` to `grakel==0.1.10`.
 
 ### Download executables
-1. For mopta, download from [Here](https://leonard.papenmeier.io/2023/02/09/mopta08-executables.html). And put it under `Standard-BO/benchmark/data`.
+1. For mopta, download from [Here](https://leonard.papenmeier.io/2023/02/09/mopta08-executables.html). If your machine is amd64, use this [link](https://mopta.papenmeier.io/mopta08_amd64.exe). And put it under `Standard-BO/benchmark/data`.
 2. For SVM, download from [Here](http://mopta-executables.s3-website.eu-north-1.amazonaws.com/slice_localization_data.csv.xz). And put it under `Standard-BO/benchmark/data`.
 
 ## Running experiments
@@ -79,7 +79,8 @@ python run_script.py --index=${SLURM_ARRAY_TASK_ID};
 
 ## BO LOOPS
 We provided 3 BO loops for standard GP in `Standard-BO/baselines/BO_loop.py`:
-1. BO with standard GP, trained with MLE: ```BO_loop_GP(dataset, seed, num_step=200, beta=1.5, if_ard=False, if_softplus=True, acqf_type="UCB")```. `if_ard` controls if ARD kernel is used. `if_softplus` controls the positive constraint, whether SOFTPLUS or EXP.
+1. BO with standard GP, trained with MLE: ```BO_loop_GP(dataset, seed, num_step=200, beta=1.5, if_ard=False, if_softplus=True, acqf_type="UCB")```. `if_ard` 
+controls if ARD kernel is used. `if_softplus` controls the positive constraint, whether SOFTPLUS or EXP. The default acqf is UCB.
 2. BO with standard GP, and NUTS sampling: ```BO_loop_GP_pyro(dataset, seed, num_step=200, beta=1.0, if_ard=False, if_softplus=True)```. Our default warmup steps and samples are 512 and 256. One could modify those in `model.train_model(warmup_steps=512, num_samples=256)`.
 3. SaasBO with MAP: We implemented [SaasBO with MAP estimator](https://arxiv.org/abs/2103.00349) based on their implementation details. `BO_loop_SaasBO_MAP(dataset, num_step=200, acqf="EI")`.
 
@@ -90,3 +91,16 @@ Here are the references for the code of previous real world benchmarks that are 
 3. NAS201 is taken from [MCTS-VS](https://github.com/lamda-bbo/MCTS-VS).
 
 We really appreciate their contribution! Especially [BAxUS](https://github.com/LeoIV/BAxUS/) authors, they created the links to download those executables.
+
+## Citation
+If you find our work or code useful in your research, you could cite those with following Bibtex:
+```
+@misc{xu2024standard,
+      title={Standard Gaussian Process is All You Need for High-Dimensional Bayesian Optimization}, 
+      author={Zhitong Xu and Shandian Zhe},
+      year={2024},
+      eprint={2402.02746},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+```
