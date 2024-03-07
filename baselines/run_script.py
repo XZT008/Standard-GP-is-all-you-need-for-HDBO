@@ -164,7 +164,7 @@ def main(index):
     elif model_name in ['SaasBO_MAP']:
         output_dir = os.path.join(cwd, "saasbo_output")
         os.makedirs(output_dir, exist_ok=True)
-        output_file = os.path.join(output_dir, f"{model_name}_{func_name}_{SEED}.pickle'")
+        output_file = os.path.join(output_dir, f"{model_name}_{func_name}_{SEED}.pickle")
     else:
         raise NotImplementedError
 
