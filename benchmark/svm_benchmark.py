@@ -22,7 +22,8 @@ class SVMBenchmark:
         self._y_test = self.y[idxs[half:]]
 
     def _load_data(self):
-        data_path = r"C:\Users\xzt\Desktop\kspace_classifier_policy\TT-HDBO\benchmark\data\slice_localization_data.csv"
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        data_path = os.path.join(dir_path, "data", "slice_localization_data.csv")
         data = pd.read_csv(data_path).to_numpy()
         X = data[:, :385]
         y = data[:, -1]

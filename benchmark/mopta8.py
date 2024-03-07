@@ -32,8 +32,12 @@ class MoptaSoftConstraints:
         elif self.machine == "i386":
             assert self.sysarch == 32, "Not supported"
             self._mopta_exectutable = "mopta08_elf32.bin"
-        # self._mopta_exectutable = "/mnt/c/Users/xzt/desktop/kspace_classifier_policy/TT-HDBO/benchmark/data/mopta08_elf64.bin"
-        self._mopta_exectutable = r"C:\Users\xzt\Desktop\kspace_classifier_policy\TT-HDBO\benchmark\data\mopta08_amd64.exe"
+        elif self.machine == "amd64":
+            assert self.sysarch == 64, "Not supported"
+            self._mopta_exectutable = "mopta08_amd64.exe"
+
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        self._mopta_exectutable = os.path.join(dir_path, "data", self._mopta_exectutable)
         os.chmod(self._mopta_exectutable, stat.S_IXUSR)
 
         self.directory_file_descriptor = tempfile.TemporaryDirectory()

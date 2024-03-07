@@ -51,6 +51,7 @@ def main(index):
     beta_out = int(10 * beta)
     if_softplus = config.if_softplus
 
+    print(f"Running --- {func_name}, SEED={SEED}, model={model_name}")
     torch.manual_seed(SEED)
     np.random.seed(SEED)
     random.seed(SEED)
