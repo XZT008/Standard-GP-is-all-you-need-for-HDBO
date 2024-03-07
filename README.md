@@ -38,7 +38,7 @@ We wrote our run script `Standard-BO/baselines/run_script.py` in a way that coul
 ```angular2html
 python run_script.py --index=${SLURM_ARRAY_TASK_ID}
 ```
-where index corresponds to the index define in experiment list,
+where index corresponds to the index define in experiment list.
 ```angular2html
 def all_configs():
     config_list = []
