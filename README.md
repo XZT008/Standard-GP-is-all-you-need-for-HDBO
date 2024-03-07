@@ -60,3 +60,5 @@ Here are the references for the code of previous real world benchmarks that are 
 1. SVM, Mopta08 are taken from [BAxUS](https://github.com/LeoIV/BAxUS/).
 2. Rover is taken from [EBO](https://github.com/zi-w/Ensemble-Bayesian-Optimization).
 3. NAS201 is taken from [MCTS-VS](https://github.com/lamda-bbo/MCTS-VS).
+
+We really appreciate their contribution!

@@ -6,7 +6,7 @@ from benchmark.naslib_benchmark import NasBench201
 from benchmark.svm_benchmark import SVMBenchmark
 from benchmark.mopta8 import MoptaSoftConstraints
 from benchmark.real_dataset import RealDataset
-from BO_loop import BO_loop_GP, BO_loop_SaasBO_MAP, BO_loop_GP_pyro, BO_loop_GP_EI
+from BO_loop import BO_loop_GP, BO_loop_SaasBO_MAP, BO_loop_GP_pyro
 from benchmark.DNA import DNA_Lasso
 import click
 
