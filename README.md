@@ -30,7 +30,7 @@ cd ..
 # Finally, install this repo
 pip install -e .
 ```
-## Troubleshooting
+### Troubleshooting
 If you have trouble installing NASLib, then modify their requirements.txt. Change `numpy>=1.22.0`
 to `numpy==1.22.0`.
 
