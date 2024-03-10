@@ -10,6 +10,7 @@ NOTE: This code need several repositories for realworld benchmarks, and there wi
 First, create a conda env and install [LassoBench](https://github.com/ksehic/LassoBench) and [NASLib](https://github.com/automl/NASLib).
 ```angular2html
 conda create -n gp_env python=3.8
+pip install --upgrade pip setuptools wheel
 
 # activate gp_env and cd TO THIS REPO
 git clone https://github.com/ksehic/LassoBench.git
@@ -26,8 +27,11 @@ cd ..
 # Finally, install this repo
 pip install -e .
 ```
+## Troubleshooting
 If you have trouble installing NASLib, then modify their requirements.txt. Change `numpy>=1.22.0`
-to `numpy==1.22.0` and change `grakel==0.1.8` to `grakel==0.1.10`.
+to `numpy==1.22.0`.
+
+For Windows users, if installation fails due to grakel, please change `grakel==0.1.8` to `grakel==0.1.10` in NASLib requirements.txt
 
 ### Download executables
 1. For mopta, download from [Here](https://leonard.papenmeier.io/2023/02/09/mopta08-executables.html). If your machine is amd64, use this [link](https://mopta.papenmeier.io/mopta08_amd64.exe). And put it under `Standard-BO/benchmark/data`.

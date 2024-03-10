@@ -8,7 +8,7 @@ setuptools.setup(
     install_requires=[
         "ax-platform==0.2.6",
         "botorch==0.6.6",
-        "GPy==1.12.0",
+        "GPy==1.10.0",
         "gpytorch==1.8.1",
         "networkx==2.6.3",
         "ngboost==0.3.11",
