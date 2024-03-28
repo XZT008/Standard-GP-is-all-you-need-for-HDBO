@@ -1,6 +1,6 @@
 # Standard Gaussian Process is All You Need for High-Dimensional Bayesian Optimization
 
-This repository provides code for our paper: [Standard Gaussian Process is All You Need for High-Dimensional Bayesian Optimization](https://arxiv.org/abs/2402.02746).
+This repository provides code for our paper: Standard Gaussian Process is All You Need for High-Dimensional Bayesian Optimization.
 In our paper, we argued that Standard GP is by far the most robust surrogate model for HDBO.
 
 ## Installation
