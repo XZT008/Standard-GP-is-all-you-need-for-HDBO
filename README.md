@@ -1,8 +1,13 @@
-# Standard Gaussian Process is All You Need for High-Dimensional Bayesian Optimization
+# Standard Gaussian Process Can Be Excellent for High-Dimensional Bayesian Optimization
 
-This repository provides code for our paper: Standard Gaussian Process is All You Need for High-Dimensional Bayesian Optimization.
+This repository provides code for our paper: Standard Gaussian Process Can Be Excellent for High-Dimensional Bayesian Optimization.
 In our paper, we argued that Standard GP is by far the most robust surrogate model for HDBO.
 
+***
+NOTE: We added theoretical analysis in our paper during last revision. In short, we believe the cause of previous poor performance of Standard BO in
+high-dim setting is caused by gradient vanishing. And we argue that with lengthscale initialization of $\sqrt(D)$ will mitigate this. Also, Matern kernel is more
+robust in high-dimensions setting than RBF.
+***
 ## Installation
 ### Setting environment
 NOTE: This code need several repositories for realworld benchmarks, and there will be some dependency conflicts. Please just ignore them.
