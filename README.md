@@ -5,7 +5,7 @@ This repository provides code for our paper: Standard Gaussian Process Can Be Ex
 
 ***
 NOTE: We added theoretical analysis in our paper during last revision. In short, we believe the cause of previous poor performance of Standard BO in
-high-dim setting is caused by gradient vanishing. And we argue that with lengthscale initialization of $\sqrt(D)$ will mitigate this. Also, Matern kernel is more
+high-dim setting is caused by gradient vanishing. And we argue that with lengthscale initialization of $c\cdot\sqrt(D)$ will mitigate this. Also, Matern kernel is more
 robust in high-dimensions setting than RBF.
 ***
 ## Installation
