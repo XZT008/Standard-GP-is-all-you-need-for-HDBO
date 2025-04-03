@@ -1,7 +1,7 @@
 # Standard Gaussian Process Can Be Excellent for High-Dimensional Bayesian Optimization
 
 This repository provides code for our paper: Standard Gaussian Process Can Be Excellent for High-Dimensional Bayesian Optimization.
-In our paper, we argued that Standard GP is by far the most robust surrogate model for HDBO.
+(**We will update the code for camera ready version shortly!**)
 
 ***
 NOTE: We added theoretical analysis in our paper during last revision. In short, we believe the cause of previous poor performance of Standard BO in
