@@ -1,7 +1,7 @@
 # Standard Gaussian Process Can Be Excellent for High-Dimensional Bayesian Optimization
 
 This repository provides code for our paper: Standard Gaussian Process Can Be Excellent for High-Dimensional Bayesian Optimization.
-(**We will update the code for camera ready version shortly!**)
+(**We updated this repo to our camera ready version.**)
 
 ***
 NOTE: We added theoretical analysis in our paper during last revision. In short, we believe the cause of previous poor performance of Standard BO in
@@ -45,6 +45,9 @@ For Windows users, if installation might fail due to grakel, please change `grak
 1. For mopta, download from [Here](https://leonard.papenmeier.io/2023/02/09/mopta08-executables.html). If your machine is amd64, use this [link](https://mopta.papenmeier.io/mopta08_amd64.exe). And put it under `Standard-BO/benchmark/data`.
 2. For SVM, download from [Here](https://archive.ics.uci.edu/dataset/206/relative+location+of+ct+slices+on+axial+axis). And put the .csv file under `Standard-BO/benchmark/data`.
 3. For NAS201, download nb201_cifar100_full_training.pickle from [Here](https://drive.google.com/drive/folders/1rwmkqyij3I24zn5GSO6fGv2mzdEfPIEa). And put it under `/NASLib/naslib/data/`.
+
+### Humanoid Env
+In order to run our humanoid-standup benchmark, you will need to install `mujoco210` and `gym==0.23.1`. 
 ## Running experiments
 We wrote our run script `Standard-BO/baselines/run_script.py` in a way that could be efficiently run on HPC with Slurm.
 ```angular2html
@@ -89,12 +92,8 @@ python run_script.py --index=${SLURM_ARRAY_TASK_ID};
 "
 ```
 
-## BO LOOPS
-We provided 3 BO loops for standard GP in `Standard-BO/baselines/BO_loop.py`:
-1. BO with standard GP, trained with MLE: ```BO_loop_GP(dataset, seed, num_step=200, beta=1.5, if_ard=False, if_softplus=True, acqf_type="UCB")```. `if_ard` 
-controls if ARD kernel is used. `if_softplus` controls the positive constraint, whether SOFTPLUS or EXP. The default acqf is UCB.
-2. BO with standard GP, and NUTS sampling: ```BO_loop_GP_pyro(dataset, seed, num_step=200, beta=1.0, if_ard=False, if_softplus=True)```. Our default warmup steps and samples are 512 and 256. One could modify those in `model.train_model(warmup_steps=512, num_samples=256)`.
-3. SaasBO with MAP: We implemented [SaasBO with MAP estimator](https://arxiv.org/abs/2103.00349) based on their implementation details. `BO_loop_SaasBO_MAP(dataset, num_step=200, acqf="EI")`.
+## Ablation Study(GP gradient vanishing)
+We also included the code for our ablation study under `/ablation`.
 
 ## Reference
 Here are the references for the code of previous real world benchmarks that are used in our experiments:
@@ -107,12 +106,13 @@ We really appreciate their contribution! Especially [BAxUS](https://github.com/L
 ## Citation
 If you find our work or code useful in your research, you could cite those with following Bibtex:
 ```
-@misc{xu2024standard,
+@misc{xu2025standardgaussianprocessneed,
       title={Standard Gaussian Process is All You Need for High-Dimensional Bayesian Optimization}, 
-      author={Zhitong Xu and Shandian Zhe},
-      year={2024},
+      author={Zhitong Xu and Haitao Wang and Jeff M Phillips and Shandian Zhe},
+      year={2025},
       eprint={2402.02746},
       archivePrefix={arXiv},
-      primaryClass={cs.LG}
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2402.02746}, 
 }
 ```
