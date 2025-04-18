@@ -106,13 +106,12 @@ We really appreciate their contribution! Especially [BAxUS](https://github.com/L
 ## Citation
 If you find our work or code useful in your research, you could cite those with following Bibtex:
 ```
-@misc{xu2025standardgaussianprocessneed,
-      title={Standard Gaussian Process is All You Need for High-Dimensional Bayesian Optimization}, 
-      author={Zhitong Xu and Haitao Wang and Jeff M Phillips and Shandian Zhe},
-      year={2025},
-      eprint={2402.02746},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/2402.02746}, 
+@inproceedings{
+xu2025standard,
+title={Standard Gaussian Process is All You Need for High-Dimensional Bayesian Optimization},
+author={Zhitong Xu and Haitao Wang and Jeff M. Phillips and Shandian Zhe},
+booktitle={The Thirteenth International Conference on Learning Representations},
+year={2025},
+url={https://openreview.net/forum?id=kX8h23UG6v}
 }
 ```
