@@ -141,13 +141,25 @@ class GP_Wrapper:
         self.gp_model.train()
         self.likelihood.train()
 
+        mll = gpytorch.mlls.ExactMarginalLogLikelihood(self.likelihood, self.gp_model).to(self.device)
         if optim == "ADAM":
             optimizer = torch.optim.Adam(self.gp_model.parameters(), lr=lr)
         elif optim == "RMSPROP":
             optimizer = torch.optim.RMSprop(self.gp_model.parameters(), lr=lr)
+        elif optim == "botorch":
+            stop_c = ExpMAStoppingCriterion(
+                maxiter=10000,
+                minimize=True,
+                n_window=10,
+                eta=1.0,
+                rel_tol=1e-6,
+            )
+
+            optimizer = torch.optim.RMSprop(self.gp_model.parameters(), lr=0.05)
+            botorch.fit.fit_gpytorch_mll_torch(mll, optimizer=optimizer, step_limit=1500, stopping_criterion=stop_c)
+            return
         else:
             raise NotImplementedError
-        mll = gpytorch.mlls.ExactMarginalLogLikelihood(self.likelihood, self.gp_model).to(self.device)
 
         for epoch in range(epochs):
             optimizer.zero_grad()

@@ -21,8 +21,11 @@ def BO_loop_GP(func_name, dataset, seed, num_step=200, beta=1.5, if_ard=False, i
         best_y_before = dataset.get_curr_max_unnormed()
         model = GP_Wrapper(X, Y, if_ard, if_softplus, if_matern=if_matern, set_ls=set_ls)
 
-        if func_name in ["Ackley", "Ackley150"]:
+        if func_name in ["Ackley150"]:
             model.train_model(1000, 0.01)
+        elif func_name in ["Ackley"]:
+            # For stability across different cpu platform
+            model.train_model(None, None, optim="botorch")
         elif func_name == "Hartmann6":
             # We used RMSProp here, due to adam being not efficient
             model.train_model(400, 0.01, optim="RMSPROP")
